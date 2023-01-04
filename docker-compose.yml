@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  api:
+    build: ./api-service
+    container_name: api
+    links:
+      - stock
+      - mongo
+    ports:
+      - 8080:8080
+    volumes:
+      - ./api-service:/usr/src/app
+    depends_on:
+      - mongo
+
+  stock:
+    build: ./stock-service
+    container_name: stock
+    ports:
+      - 8081:8081
+    volumes:
+      - ./stock-service:/usr/src/app
+
+  mongo:
+    container_name: mongo
+    image: mongo:5.0
+    restart: always
+    command: mongod --quiet --logpath /dev/null
+    ports:
+    - 27017:27017
+    volumes: 
+      - ~/apps/mongo:/data/db

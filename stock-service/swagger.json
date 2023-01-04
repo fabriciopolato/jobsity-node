@@ -1,0 +1,127 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "stock-service",
+    "description": "This api will be used to get stock info from https://stooq.com/q/l/ and return it to the api-service",
+    "contact": {
+      "name": "Fabrício Polato",
+      "email": "fabriciopolato@gmail.com"
+    },
+    "externalDocs": {
+      "description": "For the api-service documentation, access the link:",
+      "url": "http://localhost:8081/v1/documentation"
+    },
+    "version":"1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8081/v1",
+      "description": "STOCK SERVICE - TEST"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "API's health",
+        "description": "This route is used by the client to know if the api is up and running",
+        "tags": ["Health"],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stocks": {
+      "get": {
+        "summary": "Route to get stock csv from https://stooq.com/q/l/. It returns a JSON response",
+        "description": "This route is used by api-service to get a stock from https://stooq.com/q/l/",
+        "tags": ["Stock"],
+        "parameters": [{
+          "name": "stockCode",
+          "in": "query",
+          "description": "the stock code used to search a specific stock",
+          "required": true,
+          "example": "a.us"
+        }],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Stock"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components":{
+    "schemas": {
+      "Stock": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          },
+          "time": {
+            "type": "string"
+          },
+          "open": {
+            "type": "string"
+          },
+          "high": {
+            "type": "string"
+          },
+          "low": {
+            "type": "string"
+          },
+          "close": {
+            "type": "string"
+          },
+          "volume": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
