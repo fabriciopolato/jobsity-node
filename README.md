@@ -25,13 +25,13 @@ The project consists of two separate services:
 1. Ensure that you have docker installed first!
 [Docker Website](https://www.docker.com/)
 
-2. Clone this repo at your local machine and install the dependencies from both API's root folder (api-service and stock-service)
+2. Clone this repo in your local machine and install the dependencies from both API's root folder (api-service and stock-service)
 
 ```bash
 npm i
 ```
 
-3. Each API folder has an `.env.example` file with the environment variables. Rename both to `.env`
+3. Each API folder has an `.env.example` file with environment variables. Rename both to `.env`
 
 4. Go to the root path of the project and run the following command in your terminal to mount the docker image in your machine:
 
@@ -39,7 +39,7 @@ npm i
 sudo docker compose up
 ```
 
-Obs: ensure that all the ports used by the project are not being used by your system. You can change ports used by the project inside the `docker-compose.yml` file and inside the `.env` files
+Obs: ensure that all ports used by the project are not being used by your system. You can change ports used by the project inside the `docker-compose.yml` file and inside the `.env` files
 
 #### PORTS:
 - 8080 - api-service
@@ -68,9 +68,9 @@ email: hellen.schaefer@ethereal.email
 password: PeksSnGj8xWWRpTUd7
 ```
 
-Once you are logged in the website, go the `Messages` tab in the navabar and there you will have access to all the emails sent by the application
+Once you are logged in, go to the `Messages` tab in the navbar. There you will have access to all emails sent by the application
 
-2. If the registration was succesfull, the api will return a token. Use the token inside your bearer authentication header requests to be allowed to use all the routes of the application
+2. If registration was succesfull, the api will return a token. Use the token inside your bearer authentication header requests to be allowed to use all routes of the application
 
 ## 6. Author
 
